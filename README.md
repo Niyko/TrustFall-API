@@ -10,7 +10,7 @@ Create a new user from the trustfall app and add it to the database
 | POST | `/create_user.php` | auth_pass |
 
 ### Request
-`````
+```json
 {
     "status": true,
     "code": "user-created",
@@ -18,4 +18,4 @@ Create a new user from the trustfall app and add it to the database
     "user_mobile": "9287548497",
     "description": "User is successfully created"
 }
-`````
+```
