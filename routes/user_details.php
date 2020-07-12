@@ -3,8 +3,8 @@
 require_once("../framework/config.php");
 
 //User given details
-$mobile = $_POST["mobile"];
-$password = $_POST["password"];
+$mobile = $_GET["mobile"];
+$password = $_GET["password"];
 
 //Check if user exist
 $existing_user = $db->where("mobile", $mobile)->getOne("users");
