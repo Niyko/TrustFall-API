@@ -94,3 +94,35 @@ Get all details and reports of the already existing user from the database
 | `user-found` | User data is sucessfully fetched |
 | `user-pass-incorrect` | User is found, but the password doesn't match |
 | `user-non-exist` | User with this mobile no doesn't exist in the database |
+
+## Send beacon
+This API route handles the distress call sending functions, Distress call is sent as direct automated TTS phone call and SMS to the emergency contact numbers
+
+### Details
+| Method | Uri | Authorization |
+| --- | --- | --- |
+| GET | `/send_beacon.php` | `password` |
+
+### Request
+```json
+{
+    "auth_key": "[AUTH-KEY]",
+    "mobile": "9287548490",
+    "password": "mypassword",
+}
+```
+
+### Request parameters
+| Parameter | type | Details | Example
+| --- | --- | --- | --- |
+| `auth_key` | String | Auth key given in the `env.php` | ef98y3497th34 |
+| `mobile` | String | 10 digit mobile number of the user | 9747187296 |
+| `password` | String | Raw password of the user | mypassword |
+
+### Response
+```json
+{
+    "status": true,
+    "code": "user-not-found"
+}
+```

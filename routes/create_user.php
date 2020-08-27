@@ -1,6 +1,7 @@
 <?php
 //Load all essential framework compoents
 require_once("../framework/config.php");
+require_once("../model/user.php");
 
 //User given details
 $username = $_POST["username"];
@@ -9,8 +10,8 @@ $password = $_POST["password"];
 $emergency_contact = $_POST["emergency_contact"];
 
 //Check if user exist
-$existing_user = $db->where("mobile", $mobile)->getOne("users", "username");
-if(is_null($existing_user)){
+$existing_user = (new UserModel($mobile, $password))->isExist();
+if($existing_user){
     $user_data = Array (
         "username" => $username,
         "mobile" => $mobile,
