@@ -11,4 +11,7 @@ $db_password = "root";
 
 /*----- AUTH -----*/
 $api_auth_password = "password";
+
+/*----- MSG91 CREDS -----*/
+$msg91_auth_key = "XXXXXXXXXXXXXXXXXX";
 ?>
