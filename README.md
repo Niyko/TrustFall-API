@@ -1,7 +1,7 @@
 ![Trust_Fall_API logo](https://i.imgur.com/jYG1zvS.png)
 API files of Trust Fall Android app
 
-## Docs
+## :notebook_with_decorative_cover: Docs
 ### Create user
 Create a new user from the trustfall app and add it to the database
 
