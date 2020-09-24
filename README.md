@@ -126,3 +126,6 @@ This API route handles the distress call sending functions, Distress call is sen
     "code": "user-not-found"
 }
 ```
+
+ ### :page_with_curl: License
+Trust Fall API is licensed under the [MIT License](https://github.com/Niyko/TrustFall-API/blob/master/LICENSE).
