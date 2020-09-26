@@ -1,5 +1,5 @@
 ![Trust_Fall_API logo](https://i.imgur.com/jYG1zvS.png)
-API files of Trust Fall Android app
+API files of Trust Fall Android app. This API is build up on PHP for backend and MySQL for database. API uses an external php library for MySQLi database wrap, checkout the library https://github.com/ThingEngineer/PHP-MySQLi-Database-Class
 
 ## :notebook_with_decorative_cover: Docs
 ### Create user
