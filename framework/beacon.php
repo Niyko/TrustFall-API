@@ -1,19 +1,19 @@
 <?php
-//Class to send SMS and Calls through MSG91
+//Class to send SMS and Calls through TXT LOCAL
 class Beacon {
 	protected $username;
 	protected $mobile;
 	protected $link;
 
-	public function __construct(string $username, string $mobile, string $link){
-		$this->username = $username;
-		$this->mobile = $mobile;
+	public function __construct(Array $user_details, string $link){
+		$this->user_details = $user_details;
 		$this->link = $link;
 	}
 
 	//Used to send SMS
 	public function sendSMS(){
-		$this->sendAPI("5f47aefad6fc0524a50b8937");
+		$msg = "Hey, This is a Emergency. {$this->user_details['username']} has been recorded as in a threat, by TrustFall App. Please make sure he/she is fine. Know more info about him/her {$this->link}";
+		$this->sendAPI($this->user_details['emergency_contact'], $msg);
 	}
 
 	//Used to send calls
@@ -22,47 +22,20 @@ class Beacon {
 	}
 
 	//Sending CURL request to MSG91 API
-	private function sendAPI($flow_id){
-		global $msg91_auth_key;
-		$curl = curl_init();
-
-		curl_setopt_array($curl, array(
-		CURLOPT_URL => "https://api.msg91.com/api/v5/flow/",
-		CURLOPT_RETURNTRANSFER => true,
-		CURLOPT_ENCODING => "",
-		CURLOPT_MAXREDIRS => 10,
-		CURLOPT_TIMEOUT => 30,
-		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-		CURLOPT_CUSTOMREQUEST => "POST",
-		CURLOPT_POSTFIELDS => '{
-			"flow_id":"$flow_id",
-			"sender" : "TRUSTFALL",
-			 "recipients" : [
-			   {
-				 "mobiles":"$this->mobile",
-				 "username":"$this->username",
-				 "link" : "$this->link"
-			   }
-		   ]
-		}',
-		CURLOPT_SSL_VERIFYHOST => 0,
-		CURLOPT_SSL_VERIFYPEER => 0,
-		CURLOPT_HTTPHEADER => array(
-			"authkey: $msg91_auth_key",
-			"content-type: application/json"
-		),
-		));
-
-		$response = curl_exec($curl);
-		$err = curl_error($curl);
-
-		curl_close($curl);
-
-		if ($err) {
-			return $err;
-		} else {
-			return $response;
-		}
+	private function sendAPI($mobile_no, $msg){
+		global $txtlocal_auth_key;
+		$numbers = array($mobile_no);
+    	$sender = urlencode('TXTLCL');
+    	$message = rawurlencode($msg);
+    	$numbers = implode(',', $numbers);
+    	$data = array('apikey' => urlencode($txtlocal_auth_key), 'numbers' => $numbers, "sender" => $sender, "message" => $message);
+    	$ch = curl_init('https://api.textlocal.in/send/');
+    	curl_setopt($ch, CURLOPT_POST, true);
+    	curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+    	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    	$response = curl_exec($ch);
+    	curl_close($ch);
+    	return $response;
 	}
 }
 ?> 
