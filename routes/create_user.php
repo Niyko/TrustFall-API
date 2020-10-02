@@ -11,7 +11,7 @@ $emergency_contact = $_POST["emergency_contact"];
 
 //Check if user exist
 $existing_user = (new UserModel($mobile, $password))->isExist();
-if($existing_user){
+if(!$existing_user){
     $user_data = Array (
         "username" => $username,
         "mobile" => $mobile,
