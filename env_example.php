@@ -1,4 +1,5 @@
 <?php
+/* Rename to env.php */
 /*----- APPLICATION -----*/
 $application_path = "/path-to-project/TrustFall-API/";
 $application_url = "http://path-to-project/TrustFall-API/";
