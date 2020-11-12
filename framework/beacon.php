@@ -12,8 +12,7 @@ class Beacon {
 
 	//Used to send SMS
 	public function sendSMS(){
-		$msg = "Hey, This is a Emergency. {$this->user_details['username']} has been recorded as in a threat, by TrustFall App. Please make sure he/she is fine. Know more info about him/her {$this->link}";
-		$this->sendAPI($this->user_details['emergency_contact'], $msg);
+		$this->sendAPI($this->user_details['emergency_contact'], $this->user_details['username']);
 	}
 
 	//Used to send calls
@@ -22,14 +21,17 @@ class Beacon {
 	}
 
 	//Sending CURL request to MSG91 API
-	private function sendAPI($mobile_no, $msg){
-		global $txtlocal_auth_key;
+	private function sendAPI($mobile_no, $varname){
 		$numbers = array($mobile_no);
-    	$sender = urlencode('TXTLCL');
-    	$message = rawurlencode($msg);
+    	$sender = urlencode('TRSFAL');
     	$numbers = implode(',', $numbers);
-    	$data = array('apikey' => urlencode($txtlocal_auth_key), 'numbers' => $numbers, "sender" => $sender, "message" => $message);
-    	$ch = curl_init('https://api.textlocal.in/send/');
+    	$data = array(
+			'From' => $sender, 
+			'To' => $numbers, 
+			'TemplateName' => 'Trustfall', 
+			'VAR1' => $varname
+		);
+    	$ch = curl_init('http://2factor.in/API/V1/390135f1-2461-11eb-83d4-0200cd936042/ADDON_SERVICES/SEND/TSMS');
     	curl_setopt($ch, CURLOPT_POST, true);
     	curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
     	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
