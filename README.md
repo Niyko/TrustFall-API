@@ -123,7 +123,7 @@ This API route handles the distress call sending functions, Distress call is sen
 ```json
 {
     "status": true,
-    "code": "user-not-found"
+    "code": "becon-sent"
 }
 ```
 
