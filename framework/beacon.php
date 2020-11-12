@@ -41,4 +41,3 @@ class Beacon {
     	return $response;
 	}
 }
-?> 
